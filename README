@@ -1,0 +1,8 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=1485
+
+The default vim behavour when switching to an open buffer is to scroll the window so the cursor will be positioned at the window's center.
+
+This script remembers the cursor position relative to the window for every visited buffer and restores it (makes proper scrolling) when switched back to the buffer.
+
+For more pleasure you can ":set nostartofline" option.
+
