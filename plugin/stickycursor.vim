@@ -5,7 +5,7 @@
 " For more pleasure you can ":set nostartofline" option.
 
 fu! SaveCursor()
-	let b:winline = winline()
+	let b:stickycursor = {'winline': winline(), 'line': line('.'), 'col': col('.')}
 
 " set up the hook to call TuneCursor on a buffer we switched to
 " BufEnter, WinEnter, BufWinEnter don't work so here is a dirty hack via CursorHold event
@@ -22,9 +22,8 @@ fu! TuneCursor()
 	au! StickyCursor
 	let &updatetime = s:updatetime
 
-	if exists("b:winline")
-		let offset = winline() - b:winline
-
+	if exists("b:stickycursor") && b:stickycursor['line'] == line('.') && b:stickycursor['col'] == col('.')
+		let offset = winline() - b:stickycursor['winline']
 		if offset > 0 "
 			execute "normal " . offset . "\<C-E>"
 		elseif offset < 0
